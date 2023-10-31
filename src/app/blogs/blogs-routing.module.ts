@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserBlogPageComponent } from "./pages/user-blog-page/user-blog-page.component";
 import { UserPostPageComponent } from "./pages/user-post-page/user-post-page.component";
 import { NewBlogPageComponent } from "./pages/new-blog-page/new-blog-page.component";
+import { EditBlogPageComponent } from "./pages/edit-blog-page/edit-blog-page.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'new-blog',
     component: NewBlogPageComponent
+  },
+  {
+    path: 'edit-blog',
+    component: EditBlogPageComponent
   }
 ]
 

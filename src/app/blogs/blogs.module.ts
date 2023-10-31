@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BlogService } from './services/blogs.service';
 import { NewBlogPageComponent } from './pages/new-blog-page/new-blog-page.component';
 import { FormsModule } from '@angular/forms';
+import { EditBlogPageComponent } from './pages/edit-blog-page/edit-blog-page.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     PostComponent,
     UserPostPageComponent,
     NewBlogPageComponent,
+    EditBlogPageComponent,
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
-import { Blog } from '../interfaces/blog.interface';
+import { Blog } from '../interfaces/blog';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { Router } from '@angular/router';
+import { EditedBlog } from '../interfaces/editedBlog.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,23 @@ import { Router } from '@angular/router';
 export class BlogService {
   private apiUrl : string = 'https://localhost:7254/api';
   private blogListSubject: BehaviorSubject<Blog[]> = new BehaviorSubject<Blog[]>([]);
+  private editedBlog : EditedBlog = {
+    blogId: '',
+    blogName: '',
+    description: ''
+  };
 
   constructor(private httpClient: HttpClient, private tokenService: TokenService, private router : Router) { }
+
+  get geteditedBlog() {
+    return this.editedBlog;
+  }
+
+  setEditedBlog(blog : EditedBlog): void{
+    this.editedBlog!.blogId = blog.blogId;
+    this.editedBlog!.blogName = blog.blogName;
+    this.editedBlog!.description = blog.description;
+  }
 
   getBlogListObservable(): BehaviorSubject<Blog[]> {
     return this.blogListSubject;
@@ -45,12 +61,24 @@ export class BlogService {
     });
     this.httpClient.post(url, { blogName, description }, { headers })
       .subscribe(response => {
-
         this.router.navigateByUrl('blogs/my-blogs');
-
       }, error => {
+      });
+  }
 
+  editBlog(blogId : string, blogName: string, description: string) : void {
+    const url = `${this.apiUrl}/blog/${blogId}`;
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
+    console.log(url)
+
+    this.httpClient.put(url, { title: blogName, description }, { headers })
+      .subscribe(response => {
+        this.router.navigateByUrl('blogs/my-blogs');
+      }, error => {
       });
   }
 

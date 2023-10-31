@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../../interfaces/blog.interface';
+import { Blog } from '../../interfaces/blog';
 import { BlogService } from '../../services/blogs.service';
+import { Router } from '@angular/router';
+import { EditedBlog } from '../../interfaces/editedBlog.interface';
 
 @Component({
   selector: 'app-user-blog-page',
@@ -18,7 +20,7 @@ export class UserBlogPageComponent implements OnInit {
   public blogs: Blog[] = [];
   public isLoading: boolean = false;
 
-  constructor(private blogService: BlogService) {}
+  constructor(private blogService: BlogService, private router : Router) {}
 
   ngOnInit(): void {
     this.blogService.getBlogListObservable().subscribe(blogs => {
@@ -48,6 +50,15 @@ export class UserBlogPageComponent implements OnInit {
 
   onEditBlog(blog: Blog): void {
 
+    const editedBlog : EditedBlog = {
+      blogId : blog.id,
+      blogName : blog.blogName,
+      description : blog.description
+    }
+
+    this.blogService.setEditedBlog(editedBlog);
+
+    this.router.navigateByUrl('blogs/edit-blog');
   }
 
 }
