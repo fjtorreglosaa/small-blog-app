@@ -79,7 +79,7 @@ export class BlogService {
       },
       error => {
         console.error('Error fetching blogs:', error);
-        this.blogListSubject.next([]); // Puedes manejar el error según tu lógica de negocio
+        this.blogListSubject.next([]);
       }
     );
   }
