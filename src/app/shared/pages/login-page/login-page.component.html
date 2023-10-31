@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center dark-theme">Login</div>
+        <div class="card-body">
+          <form (ngSubmit)="login()">
+            <div class="form-group mb-3">
+              <label for="email">Email:</label>
+              <input type="email" placeholder="Enter your email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password:</label>
+              <input type="password" placeholder="Enter your password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+            </div>
+            <div class="form-group text-center mb-3">
+              <button type="submit" class="btn btn-dark btn-block" style="margin-right: 10px; width: 100px">Enter</button>
+              <button class="btn btn-dark btn-block" (click)="register()" style="width: 100px">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-toaster *ngIf="showToast" [title]="errorTitle" [message]="errorMessage"></app-toaster>
+
+
